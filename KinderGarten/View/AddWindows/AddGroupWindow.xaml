@@ -1,0 +1,53 @@
+﻿<Window x:Class="KinderGarten.View.AddGroupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KinderGarten.View"
+       mc:Ignorable="d"
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+          xmlns:viewmodel="clr-namespace:KinderGarten.ViewModel"
+        Title="AddWindow" Height="720" Width="1280" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <Grid >
+
+        <Rectangle HorizontalAlignment="Center" Height="551" VerticalAlignment="Center" Width="526" RadiusX="17.072" RadiusY="17.072" Fill="White" Opacity="0.997" Stroke="Black"/>
+        <Rectangle  HorizontalAlignment="Center" Height="42" Margin="0,84,0,0" VerticalAlignment="Top" Width="526" Fill="#FF237DB7"/>
+        <Button Click="createEducator_Click"   Cursor="Hand" x:Name="createEducator"   Content="Добавить" Background="#FF2997DE" Foreground="White" FontSize="24" Margin="556,542,556,114">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FE6584"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="150" Height="60"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Image x:Name="ExitImage" MouseLeftButtonDown="ExitImage_MouseDown" Cursor="Hand" HorizontalAlignment="Left" Height="28" Margin="858,91,0,0" VerticalAlignment="Top" Width="28" Source="/Image/1486395882-close_80604.png" Opacity="0.3" RenderTransformOrigin="0.608,1.118"  />
+        <Rectangle Cursor="Hand" x:Name="minimizedBtn" HorizontalAlignment="Left" Height="8" Margin="822,105,0,0" VerticalAlignment="Top" Width="30" Fill="#FF38383A" Opacity="0.3"/>
+        <TextBlock HorizontalAlignment="Center" Height="39" Margin="0,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="24"><Run Language="ru-ru" Text="Название группы"/><Run Text=":"/></TextBlock>
+        <TextBox x:Name="GroupName" Text="{Binding Name}" materialDesign:HintAssist.Hint="Название группы" HorizontalAlignment="Center" Height="38" Margin="0,256,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="16" TextAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" Height="39" Margin="0,302,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="24" TextAlignment="Center" Text="Возраст детей:"/>
+        <TextBox x:Name="MinText" Text="{Binding AgeFrom}" materialDesign:HintAssist.Hint="Мин" HorizontalAlignment="Left" Height="38" TextWrapping="Wrap" VerticalAlignment="Top" Width="43" FontSize="16" TextAlignment="Center" Margin="535,360,0,0"/>
+        <TextBox x:Name="MaxText" Text="{Binding AgeTo}" materialDesign:HintAssist.Hint="Макс" HorizontalAlignment="Left" Height="38" TextWrapping="Wrap" VerticalAlignment="Top" Width="43" FontSize="16" TextAlignment="Center" Margin="702,360,0,0"/>
+        <TextBlock HorizontalAlignment="Center" Height="38" Margin="0,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="19" FontSize="24"><Run Language="ru-ru" Text="-"/></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Height="39" Margin="0,414,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" FontSize="24" TextAlignment="Center" Text="Воспитатели:"/>
+        <ComboBox SelectedValuePath="ID" SelectedValue="{Binding Teachers1Id}" DisplayMemberPath="FullNameTeacher" x:Name="FirstBox" materialDesign:HintAssist.Hint="Главный воспитатель" HorizontalAlignment="Left" Height="37" Margin="417,462,0,0" VerticalAlignment="Top" Width="197" FontSize="16"/>
+        <ComboBox SelectedValuePath="ID" SelectedValue="{Binding Teachers2Id}" DisplayMemberPath="FullNameTeacher" x:Name="LastBox" materialDesign:HintAssist.Hint="Помощик воспитателя" HorizontalAlignment="Left" Height="37" Margin="675,462,0,0" VerticalAlignment="Top" Width="197" FontSize="16"/>
+    </Grid>
+</Window>

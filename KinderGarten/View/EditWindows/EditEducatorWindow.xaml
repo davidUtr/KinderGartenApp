@@ -1,0 +1,116 @@
+﻿<Window x:Class="KinderGarten.View.EditEducatorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KinderGarten.View"
+        xmlns:locals="clr-namespace:KinderGarten.Model"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Language="ru-RU"
+        xmlns:viewmodel="clr-namespace:KinderGarten.ViewModel"
+          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="AddWindow" Height="720" Width="1280" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <locals:ImagePathConverter x:Key="ImagePathConverter"/>
+    </Window.Resources>
+    <Grid MouseDown="Grid_MouseDown">
+
+        <Rectangle HorizontalAlignment="Center" Height="623" VerticalAlignment="Center" Width="769" RadiusX="17.072" RadiusY="17.072" Fill="White" Opacity="0.997" Stroke="Black"/>
+        <Rectangle HorizontalAlignment="Center" Height="42" Margin="0,48,0,0" VerticalAlignment="Top" Width="769" Fill="#FF237DB7" RadiusX="0" RadiusY="0"/>
+        <Button Click="EditEducator_Click"   Cursor="Hand" x:Name="EditEducator"   Content="Изменить" Background="#FF2997DE" Foreground="White" FontSize="24" Margin="802,588,310,68">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FE6584"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="150" Height="60"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Image x:Name="ExitImage" MouseDown="ExitImage_MouseDown" Cursor="Hand" HorizontalAlignment="Left" Height="28" Margin="982,55,0,0" VerticalAlignment="Top" Width="28" Source="/Image/1486395882-close_80604.png" Opacity="0.3" RenderTransformOrigin="0.608,1.118" MouseEnter="ExitImage_MouseEnter" MouseLeave="ExitImage_MouseLeave"/>
+        <Rectangle Cursor="Hand" x:Name="minimizedBtn" MouseDown="Rectangle_MouseDown" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" HorizontalAlignment="Left" Height="8" Margin="946,69,0,0" VerticalAlignment="Top" Width="30" Fill="#FF38383A" Opacity="0.3"/>
+        <Button Click="DeleteButton_Click"   Cursor="Hand" x:Name="DeleteButton"  Content="Удалить" Background="#FF2997DE" Foreground="White" FontSize="24" Margin="293,588,819,68">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FE6584"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="150" Height="60"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <TextBox TextChanged="Text_TextChanged" Text="{Binding Surname}" materialDesign:HintAssist.Hint="Фамилия" x:Name="SurnameText" HorizontalAlignment="Left" Height="34" Margin="276,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="18"/>
+        <TextBox TextChanged="Text_TextChanged" Text="{Binding Name}" materialDesign:HintAssist.Hint="Имя" x:Name="NameText" HorizontalAlignment="Left" Height="34" Margin="276,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="276,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16"><Run Language="ru-ru" Text="Фамилия"/><Run Text=":"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="276,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16"><Run Language="ru-ru" Text="Имя"/><Run Text=":"/></TextBlock>
+        <xctk:MaskedTextBox Text="{Binding NumberPhone}"   x:Name="PhoneText" HorizontalAlignment="Left" Height="34" Margin="276,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="18" BorderBrush="#FF757575"/>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="276,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16"><Run Language="ru-ru" Text="Номер телефона"/><Run Text=":"/></TextBlock>
+        <TextBox Text="{Binding SerialPasport}" materialDesign:HintAssist.Hint="Серия паспорта" PreviewTextInput="Text_PreviewTextInput" x:Name="SerialText" HorizontalAlignment="Left" Height="34" Margin="520,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="520,112,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16"><Run Language="ru-ru" Text="Серия паспорта"/><Run Text=":"/></TextBlock>
+        <TextBox Text="{Binding NumberPasport}" materialDesign:HintAssist.Hint="Номер паспорта" PreviewTextInput="Text_PreviewTextInput" x:Name="NumberPasText" HorizontalAlignment="Left" Height="34" Margin="520,223,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="520,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16" Text="Номер паспорта:"/>
+        <TextBox Text="{Binding Address}" materialDesign:HintAssist.Hint="Адрес" x:Name="AddressText" HorizontalAlignment="Left" Height="34" Margin="520,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="520,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16"><Run Language="ru-ru" Text="Адрес"/><Run Text=":"/></TextBlock>
+        <TextBox Text="{Binding Salary}"  materialDesign:HintAssist.Hint="Зарплата" x:Name="SalaryText" HorizontalAlignment="Left" Height="34" PreviewTextInput="Text_PreviewTextInput" Margin="276,396,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="202" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="276,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16"><Run Language="ru-ru" Text="Зарплата"/><Run Text=":"/></TextBlock>
+        <DatePicker SelectedDate="{Binding HireDate}" HorizontalAlignment="Left" Height="36" Width="202" Margin="520,394,0,0" VerticalAlignment="Top" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Height="29" Margin="520,360,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" FontSize="16"><Run Language="ru-ru" Text="Дата приёма на работу"/><Run Text=":"/></TextBlock>
+        <Image x:Name="TeacherImage" Source="{Binding PhotoTeachers, Converter={StaticResource ImagePathConverter}}" HorizontalAlignment="Left" Height="240" Margin="766,141,0,0" VerticalAlignment="Top" Width="230" Stretch="UniformToFill"/>
+        <Button    Cursor="Hand" x:Name="ImageButton"  Content="Сменить" Click="ImageButton_Click" Background="#FF2997DE" Foreground="White" FontSize="24" Margin="802,395,310,261">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FE6584"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="150" Height="60"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Window>

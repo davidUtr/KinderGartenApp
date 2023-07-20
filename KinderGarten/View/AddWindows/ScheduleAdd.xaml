@@ -1,0 +1,67 @@
+﻿<Window x:Class="KinderGarten.View.AddWindows.ScheduleAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:KinderGarten.ViewModel"
+        xmlns:local="clr-namespace:KinderGarten.View.AddWindows"
+        mc:Ignorable="d"
+      Language="ru-RU"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Loaded="Window_Loaded" Title="ScheduleAdd" Height="720" Width="1280" Background="{x:Null}" WindowStyle="None" AllowsTransparency="True" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <viewmodel:AddScheduleWindow/>
+    </Window.DataContext>
+    <Grid MouseDown="Grid_MouseDown">
+
+        <Rectangle HorizontalAlignment="Center" Height="626" VerticalAlignment="Center" Width="526" RadiusX="17.072" RadiusY="17.072" Fill="White" Opacity="0.997" Stroke="Black"/>
+        <Rectangle  HorizontalAlignment="Center" Height="42" Margin="0,40,0,0" VerticalAlignment="Top" Width="526" Fill="#FF237DB7"/>
+        <Button Command="{Binding AddSchedule, Mode=TwoWay}" Click="createSchedule_Click"    Cursor="Hand" x:Name="createSchedule"   Content="Добавить" Background="#FF2997DE" Foreground="White" FontSize="24" Margin="556,600,556,60">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FE6584"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="150" Height="60"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Image x:Name="ExitImage" MouseDown="ExitImage_MouseDown" Cursor="Hand" HorizontalAlignment="Left" Height="28" Margin="858,47,0,0" VerticalAlignment="Top" Width="28" Source="/Image/1486395882-close_80604.png" Opacity="0.3" RenderTransformOrigin="0.608,1.118" MouseEnter="ExitImage_MouseEnter" MouseLeave="ExitImage_MouseLeave"/>
+        <Rectangle Cursor="Hand" x:Name="minimizedBtn" MouseDown="Rectangle_MouseDown" MouseEnter="Rectangle_MouseEnter" MouseLeave="Rectangle_MouseLeave" HorizontalAlignment="Left" Height="8" Margin="822,61,0,0" VerticalAlignment="Top" Width="30" Fill="#FF38383A" Opacity="0.3"/>
+        <TextBlock HorizontalAlignment="Center" Height="42" Margin="0,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" FontSize="28"><Run Language="ru-ru" Text="Новое занятие"/></TextBlock>
+        <DatePicker SelectedDate="{Binding Date}" Language="ru-RU" Name="datePicker" materialDesign:HintAssist.Hint="Дата" HorizontalAlignment="Left" Height="40" Width="194" Margin="396,249,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <xctk:MaskedTextBox Mask="00:00"  Text="{Binding StartTime}"  HorizontalAlignment="Left" Height="40" Margin="789,249,0,0" TextWrapping="Wrap" x:Name="TimeText" materialDesign:HintAssist.Hint="Время (час,мин,сек)" VerticalAlignment="Top" Width="63" FontSize="24"/>
+        <TextBox Text="{Binding Activity}" x:Name="activityText" materialDesign:HintAssist.Hint="Занятие" HorizontalAlignment="Center" Height="50" Margin="0,321,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="264" FontSize="24"/>
+        <ComboBox x:Name="comboBoxGroup" ItemsSource="{Binding Groups, Mode=TwoWay}" DisplayMemberPath="Name" SelectedValuePath="ID" SelectedValue="{Binding SelectedItem1}" materialDesign:HintAssist.Hint="Группа" HorizontalAlignment="Center" Height="48" Margin="0,396,0,0" VerticalAlignment="Top" Width="264" FontSize="24">
+
+        </ComboBox>
+        <ComboBox x:Name="comboBoxTeacher"  SelectedValue="{Binding SelectedItem2}" SelectedValuePath="ID" ItemsSource="{Binding Teachers,Mode=TwoWay}" materialDesign:HintAssist.Hint="Воспитатели" HorizontalAlignment="Center" Height="48" Margin="0,485,0,0" VerticalAlignment="Top" Width="264" FontSize="24">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Name}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Path=Surname}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock HorizontalAlignment="Left" Height="40" Margin="617,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" FontSize="24" Foreground="Gray" Text="Время начала:"/>
+    </Grid>
+</Window>

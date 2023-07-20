@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\KinderGarten",
+    "\\KinderGarten\\Model",
+    "\\KinderGarten\\Model\\Entity",
+    "\\KinderGarten\\View",
+    "\\KinderGarten\\ViewModel",
+    "\\KinderGarten\\View\\AddWindows",
+    "\\KinderGarten\\View\\EditWindows",
+    "\\KinderGarten\\View\\Pages"
+  ],
+  "SelectedNode": "\\KinderGarten\\Model\\KinderGartenDbAccess.cs",
+  "PreviewInSolutionExplorer": false
+}

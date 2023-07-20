@@ -1,0 +1,155 @@
+﻿<Page x:Class="KinderGarten.View.ParentsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:KinderGarten.View"
+       xmlns:viewmodel="clr-namespace:KinderGarten.ViewModel"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Language="ru-RU"
+      mc:Ignorable="d" 
+      d:DesignHeight="665" d:DesignWidth="1434"
+      Height="665" Width="1434"
+      Title="Расписание">
+
+    <Grid Height="665" Width="1434" x:Name="Grids" >
+        <DataGrid  Style="{StaticResource MyDataGridStyle}" Loaded="ParentsDG_Loaded"  MinRowHeight="50" FontSize="16" FontFamily="Segoe UI Variable Small Semibold"    Width="1434" IsReadOnly="True"   VerticalScrollBarVisibility="Hidden"   x:Name="ParentsDG" AutoGenerateColumns="False" HorizontalAlignment="Center" Margin="0,0,0,70"  ColumnWidth="*" BorderBrush="#FF717171" Background="White" Foreground="#DD2F2F2F">
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"  TargetType="{x:Type DataGridColumnHeader}">
+                    <Setter Property="Foreground" Value="#FFF" />
+                    <Setter Property="Background" Value="#FF2997DE" />
+                </Style>
+                <Style TargetType="{x:Type DataGridCell}">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#FF9DB5CC" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn  MinWidth="150" Width="*" Binding="{Binding Name}" Header="Имя"/>
+                <DataGridTextColumn MinWidth="150" Width="*" Binding="{Binding Surname}" Header="Фамилия"/>
+                <DataGridTextColumn MinWidth="250" Width="*" Binding="{Binding NumberPhone}" Header="Телефон"/>
+                <DataGridTextColumn MinWidth="250" Width="*" Binding="{Binding SerialPasport}" Header="Серия паспорта"/>
+                <DataGridTextColumn MinWidth="150" Width="*" Binding="{Binding NumberPasport}" Header="Номер паспорта"/>
+                <DataGridTextColumn MinWidth="150" Width="*" Binding="{Binding Address}" Header="Адрес"/>
+                <DataGridTemplateColumn MinWidth="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button   CommandParameter="{Binding ''}" x:Name="editButton" Foreground="White" Content="Изменить" Click="Button_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                                        <Setter Property="Background" Value="#FF2997DE"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FF14508E"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Width="100" Height="35"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn MinWidth="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="deleteSchedule" Click="deleteSchedule_Click"  CommandParameter="{Binding ''}" Foreground="White" Content="Удалить">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                                        <Setter Property="Background" Value="#FF2997DE"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#FF14508E"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Width="100" Height="35"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                                            <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Click="AddBtn_Click"   Cursor="Hand" x:Name="AddBtn"  Content="Добавить" Background="#FF2997DE" Foreground="White" FontSize="24" Margin="1246,610,0,8">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FE6584"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="140" Height="40"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button Click="PrintButton_Click"  Cursor="Hand" x:Name="PrintButton"  Content="Печать" Background="#FF2997DE" Foreground="White" FontSize="24" Margin="333,610,1046,8">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="TextElement.FontFamily" Value="Fonts/#Dosis"/>
+                    <Setter Property="Background" Value="#FE6584"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FE6584"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Width="140" Height="40"
+                        CornerRadius="12"
+                        Background="{TemplateBinding Background}" Margin="0,4,-142,4">
+                        <ContentPresenter VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <TextBox x:Name="SearchText" TextChanged="SearchText_TextChanged" materialDesign:HintAssist.Hint="Поиск по серии и номеру паспорта" HorizontalAlignment="Left" Height="42" TextWrapping="Wrap" VerticalAlignment="Top" Width="333" Background="White" FontSize="20" Margin="10,613,0,0" BorderBrush="#89000000" Foreground="Black"/>
+
+
+    </Grid>
+</Page>
